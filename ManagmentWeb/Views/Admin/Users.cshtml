@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ManagmentWeb.Models.UserModel>
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+}
+
+<h1>Users</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <label class="control-label">Role</label>
+        <select id="ddRole" class="form-control">
+            <option></option>
+            @if (ViewBag.Roles != null)
+            {
+                @foreach (var item in ViewBag.Roles)
+                {
+                    if (item.RoleName.ToLower() != "admin")
+                    {
+                        <option value="@item.Id">@item.RoleName</option>
+                    }
+                }
+            }
+
+
+        </select>
+    </div>
+    <div class="col-md-2" style="margin-top: 5px;">
+        <br />
+        <input type="button" class="form-control" value="Search" id="btnSearch" />
+    </div>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>*@
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Mobile
+                </th>
+
+                <th>
+                       Role
+                    </th>
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody id="tbodyUser">
+            @Html.Partial("/Views/Shared/PartialViews/Admin/_Users.cshtml", Model)
+        </tbody>
+    </table>
+    <script>
+    $(document).ready(
+        function () {
+            $('#btnSearch').click(function (e) {
+                debugger
+                var DTO = {
+                    RoleId: $('#ddRole').val()
+                };
+                e.preventDefault();
+                $.ajax({
+                    url: '/Admin/UserInfoAjax',
+                    type: "GET",
+                    dataType: "html",
+                    data: DTO,
+                    cache: false,
+                    success: function (data) {
+                        //Fill div with results
+                        $("#tbodyUser").html(data);
+                        $("#tbodyUser").show();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+    </script>

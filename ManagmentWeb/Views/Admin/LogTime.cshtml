@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ManagmentWeb.Models.LogTimeModel>
+
+@{
+    ViewData["Title"] = "LogTime";
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+}
+
+<h1>LogTime</h1>
+ @functions{
+     public string gettimespent(string starttime,string endtime)
+     {
+         TimeSpan start = TimeSpan.Parse(starttime);
+         TimeSpan end = TimeSpan.Parse(endtime);
+         TimeSpan res = start.Subtract(end).Duration();
+         return res.ToString();
+     }
+ }
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+               Name
+            </th>
+            <th>
+                Log Date
+            </th>
+            <th>
+                Start Time
+            </th>
+            <th>
+                End Time
+            </th>
+            <th>
+                Time Spent
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Who)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LogDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @gettimespent(item.StartTime,item.EndTime)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+            }
+        }
+
+    </tbody>
+</table>

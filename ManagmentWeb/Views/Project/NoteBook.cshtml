@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ManagmentWeb.Models.NoteBookModel>
+
+@{
+    ViewData["Title"] = "NoteBook";
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+}
+
+<h1>NoteBook</h1>
+ 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

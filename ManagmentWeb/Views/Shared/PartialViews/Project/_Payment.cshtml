@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ManagmentWeb.Models.PaymentInfoModel>
+@functions  {
+    string   getPaymentMethod(int PaymentMethod)
+    {
+        string method = "";
+        if (PaymentMethod==1)
+        {
+            method = "Paypal";
+        }
+        else if (PaymentMethod==2)
+        {
+            method = "Cheque";
+        }
+        else
+        {
+            method = "Zelle";
+        }
+        return method;
+    }
+    string   getPaymentType(int PaymentType)
+    {
+        string method = "";
+        if (PaymentType==1)
+        {
+            method = "Pay by Hour";
+        }
+        else if (PaymentType==2)
+        {
+            method = "Pay by Week";
+        }
+        else if (PaymentType==3)
+        {
+            method = "Pay by Month";
+        }
+        else if (PaymentType==4)
+        {
+            method = "Pay by Project";
+        }
+        return method;
+    }
+}
+        @if (Model != null && Model.Count() > 0)
+        {
+            @foreach (var item in Model)
+            {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.PayTo)
+        </td>
+        <td>
+            <span>@getPaymentType(item.PaymentType)</span>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @getPaymentMethod(item.PaymentMethod)
+        </td>
+
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+    </tr>
+            }
+        }
+

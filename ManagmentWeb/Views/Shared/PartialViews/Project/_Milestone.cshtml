@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ManagmentWeb.Models.MilestoneModel>
+@if (Model!=null && Model.Count()>0)
+{
+
+
+@foreach (var item in Model)
+{
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @if (!string.IsNullOrEmpty(item.StartDate))
+            {
+                <span> @item.StartDate</span>
+            }
+
+        </td>
+        <td>
+            @if (!string.IsNullOrEmpty(item.ExpectedDate))
+            {
+                <span> @item.ExpectedDate</span>
+            }
+
+        </td>
+        <td>
+            @if (!string.IsNullOrEmpty(item.DueDate))
+            {
+                <span> @item.DueDate</span>
+            }
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResponsiblePerson)
+        </td>
+
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+        </td>
+    </tr>
+}
+    }

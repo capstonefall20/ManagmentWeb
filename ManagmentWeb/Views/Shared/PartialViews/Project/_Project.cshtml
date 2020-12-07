@@ -1,0 +1,94 @@
+﻿@model List<ManagmentWeb.Models.ProjectsModel>
+@functions  {
+    string getPriority(int Priority)
+    {
+        string method = "";
+        if (Priority == 1)
+        {
+            method = "High";
+        }
+        else if (Priority == 2)
+        {
+            method = "Medium";
+        }
+        else
+        {
+            method = "Low";
+        }
+        return method;
+    }
+}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Total Files
+                </th>
+                <th>
+                    Assigned Users
+                </th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="~/Project/tasks?projectid=@item.ProjectId&Name=@item.Name">@Html.DisplayFor(modelItem => item.Name)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+
+                            @if (item.StartDate != null && item.StartDate != DateTime.MinValue)
+                            {
+                                <span> @item.StartDate.ToString("MM/dd/yyyy")</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.DueDate != null && item.DueDate != DateTime.MinValue)
+                            {
+                                <span>
+                                    @item.DueDate.ToString("MM/dd/yyyy")
+                                </span>
+                            }
+
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalFiles)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalUsers)
+                        </td>
+                        <td>
+                            @getPriority(item.Priority)
+                        </td>
+                        @*<td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>*@
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+

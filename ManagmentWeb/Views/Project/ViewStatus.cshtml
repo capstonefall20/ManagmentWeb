@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = "DashboardLayout";
+    ViewData["Title"] = "ViewStatus";
+}
+<style>
+    .padding {
+        padding-bottom: 3px;
+    }
+</style>
+<h1>View Status of the Project</h1>
+<br />
+<div class="row">
+    @*<div class="col-md-1">Project</div>*@
+    <div class="col-md-3">
+        <label class="padding">Project</label>
+        <select id="ProjectId" class="form-control">
+            <option value="">Select</option>
+            @if (ViewBag.Project != null)
+            {
+                foreach (var item in ViewBag.Project)
+                {
+                    <option value="@item.ProjectId">@item.Name</option>
+                }
+            }
+        </select>
+    </div>
+    @*<div class="col-md-1">Status</div>*@
+    <div class="col-md-3">
+        <label class="padding">Status</label>
+        <select id="StatusId" class="form-control">
+            <option value="">Select</option>
+            <option value="1">Active</option>
+            <option value="2">Starred</option>
+            <option value="3">Current</option>
+            <option value="4">Late</option>
+            <option value="5">Complete</option>
+            <option value="6">Archived</option>
+        </select>
+    </div>
+    <div class="col-md-4" style="margin-top: 30px;"><input type="button" value="View Status" id="btnView" /></div>
+</div>
+<div id="result" style="display:none">
+
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(
+        function () {
+            $('#btnView').click(function (e) {
+                var DTO = {
+                    ProjectId: $('#ProjectId').val()
+                    ,Status: $('#StatusId').val()
+                };
+                e.preventDefault();
+                $.ajax({
+                    url: '/Project/GetViewStatus',
+                    type: "GET",
+                    dataType: "html",
+                    data: DTO,
+                    cache: false,
+                    success: function (data) {
+                        //Fill div with results
+                        $("#result").html(data);
+                        $("#result").show();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+</script>
+

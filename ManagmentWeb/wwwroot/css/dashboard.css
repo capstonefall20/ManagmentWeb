@@ -1,0 +1,28 @@
+﻿.dashboard_heading {
+    background-color: #546f9d;
+    color: ghostwhite;
+    padding: 30px 0px 30px 0px;
+    font-size: 35px;
+}
+.dashboard_top {
+    background-color: black;
+    padding: 27px 0px 27px 0px;
+}
+.dashboard_login_heading {
+    font-size: 21px;
+    font-weight: 600;
+    padding-top: 5px;
+}
+.dashboard_tiles_link {
+    background-color: black;
+    color: white;
+    padding: 7px 0px 10px 0px;
+    text-align: center;
+    margin: 10px 10px 0px 10px;
+}
+.dashboard_tiles img{
+    height:230px;
+}
+.dashboard_tiles_link a {
+    color: white;
+}

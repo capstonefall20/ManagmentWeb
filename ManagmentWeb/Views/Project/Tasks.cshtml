@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ManagmentWeb.Models.ProjectTaskModel>
+
+@{
+    ViewData["Title"] = "Tasks";
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+}
+
+    <h1>Tasks - @ViewBag.Name</h1>
+<div>
+    <a asp-action="AddTask" asp-route-ProjectId=@ViewBag.ProjectId>Add New</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+           
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>No of Users</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                   
+                  
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalUsers) 
+                    </td>
+                    @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

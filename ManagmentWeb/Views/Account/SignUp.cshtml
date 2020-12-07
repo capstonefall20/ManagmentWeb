@@ -1,0 +1,95 @@
+﻿@model ManagmentWeb.Models.UserModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignUp</title>
+    <link href="~/css/Login.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                <form asp-action="SignUp" autocomplete="off">
+                    <span class="login100-form-title p-b-33">
+                        Sign Up
+                    </span>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="wrap-input100 validate-input" data-validate="Firstname is required">
+
+                        <input asp-for="FirstName" class="input100" placeholder="First Name" autocomplete="off"/>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Lastname is required">
+
+                        <input asp-for="LastName" class="input100" placeholder="Last Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+
+                        <input asp-for="Email" class="input100" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Mobile is required">
+                        <input asp-for="Mobile" class="input100" placeholder="Mobile" type="number" maxlength="10" />
+                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        <input asp-for="Password" class="input100" placeholder="Password" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        <input asp-for="ConfirmPassword" class="input100" placeholder="Confirm Password" type="password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn m-t-20">
+                        <button type="submit" class="login100-form-btn">
+                            Sign in
+                        </button>
+                    </div>
+                    @if (ViewBag.Success != null)
+                    {
+                        <div class="alert alert-success">
+                            @ViewBag.Success
+                        </div>
+                    }
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            @ViewBag.Error
+                        </div>
+                    }
+                </form>
+                <div class="text-center" style="margin-top: 15px;">
+                    <a asp-action="Login">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

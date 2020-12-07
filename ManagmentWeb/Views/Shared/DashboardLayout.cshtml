@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Online Project Management</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <link href="~/css/dashboard.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <link href="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
+          rel="stylesheet" type="text/css" />
+    <script src="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
+          rel="stylesheet" type="text/css" />
+    <style>
+        .navbar-dark .navbar-nav .nav-link {
+            /* color: rgba(255,255,255,.5); */
+            color: #ffff;
+        }
+        .nav-item, .navbar-brand {
+            padding-right: 10px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <div style="clear:both"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+                        <a class="navbar-brand" href="/project/projects" style="padding:0px 0px">
+                            <img class="logo" src="~/images/GCI-Logo-11-13-2020.jpg" style="height: 50px;left:0px" />
+                        </a>
+                        <ul class="navbar-nav">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    Users
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/admin/addusers">Add User</a>
+                                    <a class="dropdown-item" href="/admin/users">Users</a>
+                                    <a class="dropdown-item" href="/admin/addlogtime">Add Log Time</a>
+                                    <a class="dropdown-item" href="/admin/logtime">Log Time</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    Projects
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/project/addprojects">Add Project</a>
+                                    <a class="dropdown-item" href="/project/projects">Projects</a>
+                                    <a class="dropdown-item" href="/project/ViewStatus">View Status</a>
+                                    <a class="dropdown-item" href="/project/Addpayment">Add Payment</a>
+                                    <a class="dropdown-item" href="/project/paymentinfo">Payment Information</a>
+                                    <a class="dropdown-item" href="/project/addnotebook">Add NoteBook</a>
+                                    <a class="dropdown-item" href="/project/notebook">NoteBook</a>
+                                    <a class="dropdown-item" href="/project/addmilestone">Add Milestone</a>
+                                    <a class="dropdown-item" href="/project/milestone">Milestones</a>
+                                    
+
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown float-right">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    Settings
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/admin/changepassword">Change Password</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="/account/Logoff" id="navbardrop">
+                                    Log out
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    @*<div class="dashboard_top">
+                        </div>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center text-capitalize">
+                    <div class="dashboard_heading">Online Project Managment</div>
+                </div>
+            </div>
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Grace Computer & Internet Corp.
+        </div>
+    </footer>
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>*@
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            debugger
+            $(".logo").css("left", "0px");
+            $(".logo").css("position", "inherit");
+        });
+       
+        $(function () {
+            $('.multiselect').multiselect({
+                includeSelectAllOption: true
+            });
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

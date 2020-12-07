@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ManagmentWeb.Models.MilestoneModel>
+
+@{
+    ViewData["Title"] = "Milestone";
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+}
+
+<h1>
+    Milestones
+</h1>
+<div class="row">
+    <div class="col-md-3">
+        <label>Responsible Person</label>
+        <select id="ddResponsiblePersonId" class="form-control">
+            <option value="">Select</option>
+            @if (ViewBag.Users != null && ViewBag.Users != null)
+            {
+                foreach (var item in ViewBag.Users)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <br />
+        <input type="button" class="form-control" value="Search" id="btnSearch" />
+    </div>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpectedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DueDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ResponsiblePerson)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="milestonebody">
+            @Html.Partial("/Views/Shared/PartialViews/Project/_Milestone.cshtml", Model)
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(
+            function () {
+                $('#btnSearch').click(function (e) {
+                    var DTO = {
+                        ResponsiblePersonId: $('#ddResponsiblePersonId').val()
+                    };
+                    e.preventDefault();
+                    $.ajax({
+                        url: '/Project/MilestoneInfoAjax',
+                        type: "GET",
+                        dataType: "html",
+                        data: DTO,
+                        cache: false,
+                        success: function (data) {
+                            //Fill div with results
+                            $("#milestonebody").html("")
+                            $("#milestonebody").html(data);
+                            $("#milestonebody").show();
+                        },
+                        error: function (xhr, status, error) {
+                            alert(xhr.responseText);
+                        }
+                    });
+                });
+            });
+
+    </script>

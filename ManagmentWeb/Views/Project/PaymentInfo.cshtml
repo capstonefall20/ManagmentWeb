@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ManagmentWeb.Models.PaymentInfoModel>
+
+@{
+    ViewData["Title"] = "Payment Information";
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+}
+
+    <h1>Payment Information</h1>
+<br />
+    <div class="row">
+        <div class="col-md-3">
+            <label>Payment Method</label>
+            <select id="ddPaymentMethod" class="form-control">
+                <option value="">Select</option>
+                <option value="1">Paypal</option>
+                <option value="2">Cheque</option>
+                <option value="3">Zelle</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label>Payment Type</label>
+            <select id="ddPaymentType" class="form-control">
+                <option value="">Select</option>
+                <option value="1">Pay by Hour</option>
+                <option value="2">Pay by Week</option>
+                <option value="3">Pay by Month</option>
+                <option value="4">Pay by Project</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <br />
+            <input type="button"  class="form-control" value="Search" id="btnSearch" />
+        </div>
+    </div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                Pay To
+            </th>
+            <th>
+                Payment Type
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hours)
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Payment Method
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody id="tbodyPayment">
+
+        @Html.Partial("/Views/Shared/PartialViews/Project/_Payment.cshtml", Model)
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(
+        function () {
+            $('#btnSearch').click(function (e) {
+                var DTO = {
+                    PaymentMethod: $('#ddPaymentMethod').val()
+                    ,PaymentType: $('#ddPaymentType').val()
+                };
+                e.preventDefault();
+                $.ajax({
+                    url: '/Project/PaymentInfoAjax',
+                    type: "GET",
+                    dataType: "html",
+                    data: DTO,
+                    cache: false,
+                    success: function (data) {
+                        //Fill div with results
+                        $("#tbodyPayment").html(data);
+                        $("#tbodyPayment").show();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+</script>
+
+

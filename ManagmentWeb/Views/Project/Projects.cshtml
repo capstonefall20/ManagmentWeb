@@ -1,0 +1,10 @@
+﻿@model List<ManagmentWeb.Models.ProjectsModel>
+
+@{
+    Layout = "DashboardLayout";
+    ViewData["Title"] = "Projects";
+}
+
+<h1>Projects</h1>
+
+@Html.Partial("/Views/Shared/PartialViews/Project/_Project.cshtml",Model)

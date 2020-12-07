@@ -1,0 +1,96 @@
+﻿@model ManagmentWeb.Models.AddPaymentModel
+
+@{
+    Layout = "DashboardLayout";
+    ViewData["Title"] = "Add Payment";
+}
+
+<h1>Add Payment</h1>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddPayment" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="PaymentId" type="hidden" class="form-control" />
+            <div class="form-group">
+                <label asp-for="PayTo" class="control-label"></label>
+                <select asp-for="PayTo" class="form-control">
+                    <option value="">Select</option>
+                    @if (ViewBag.User != null)
+                    {
+                        foreach (var item in ViewBag.User)
+                        {
+                            <option value="@item.Id">@item.FirstName @item.LastName</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="PayTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    Payment Type
+                </label>
+                <select asp-for="PaymentType" class="form-control">
+                    <option value="">Select</option>
+                    <option value="1">Pay by Hour</option>
+                    <option value="2">Pay by Week</option>
+                    <option value="3">Pay by Month</option>
+                    <option value="4">Pay by Project</option>
+                </select>
+                <span asp-validation-for="PaymentType" class="text-danger"></span>
+            </div>
+            <div class="divratehour" style="display:@(Model.PaymentType==4?"none":"")">
+                <div class="form-group">
+                    <label asp-for="Hours" class="control-label"></label>
+                    <input asp-for="Hours" class="form-control" type="number" step="1" />
+                    <span asp-validation-for="Hours" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group divtotal " style="display:@(Model.PaymentType==4?"":"none")">
+                <label  class="control-label">Amount</label>
+                <input asp-for="Total" class="form-control" type="number" step="1" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentMethod" class="control-label"></label>
+                <select asp-for="PaymentMethod" class="form-control">
+                    <option value="">Select</option>
+                    <option value="1">Paypal</option>
+                    <option value="2">Cheque</option>
+                    <option value="3">Zelle</option>
+                </select>
+                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Pay" class="btn btn-primary" />
+            </div>
+        </form>
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success"> <span> @ViewBag.Success</span></div>
+        }
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger"> <span> @ViewBag.Error</span></div>
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#PaymentType').change(function () {
+            if ($(this).val() == 4) {
+                 $("#Total").val("")
+                $(".divratehour").hide()
+                $(".divtotal").show()
+            }
+            else {
+                 $("#Rate").val("")
+                $("#Hours").val("")
+                 $(".divtotal").hide()
+                $(".divratehour").show()
+            }
+    });
+        });
+</script>
